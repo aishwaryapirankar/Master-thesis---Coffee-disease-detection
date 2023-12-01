@@ -1,5 +1,7 @@
 # Comparative Study of Coffee Disease Detection
 
+App is deployed at https://coffee-disease-detection-by-ap.streamlit.app/ 
+
 ## Overview
 
 This repository presents a master thesis project focused on a comparative study of Coffee Disease Detection using ensemble CNN models and machine learning (ML) classification with features extracted from CNN models. The goal is to compare the performance of various deep learning and ML models for accurate detection of coffee diseases. The study encompasses different ensemble CNN models trained from scratch and established CNN architectures, as well as a variety of ML classifiers.
