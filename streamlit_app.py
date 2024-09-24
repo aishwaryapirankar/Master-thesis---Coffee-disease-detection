@@ -5,9 +5,23 @@ import numpy as np
 from PIL import Image
 model = tf.keras.models.load_model('my_model.h5',  compile=False)
 
+# def predict(model, img):
+#     img = Image.open(img).resize([256,256])
+#     img_array = tf.keras.preprocessing.image.img_to_array(img)
+#     img_array = np.expand_dims(img, axis=0) 
+
+#     prediction = model.predict(img_array)
+
+#     class_names = ['Coffee__healthy', 'Coffee__red_spider_mite', 'Coffee__rust']
+#     predicted_class = class_names[np.argmax(prediction[0])]
+
+#     return predicted_class
+
 def predict(model, img):
     img = Image.open(img).resize([256,256])
     img_array = tf.keras.preprocessing.image.img_to_array(img)
+    # Convert to RGB (assuming image has alpha channel)
+    img_array = img_array[:,:,:3]  
     img_array = np.expand_dims(img, axis=0) 
 
     prediction = model.predict(img_array)
