@@ -18,11 +18,20 @@ model = tf.keras.models.load_model('my_model.h5',  compile=False)
 #     return predicted_class
 
 def predict(model, img):
-    img = Image.open(img).resize([256,256])
+    img = Image.open(img).resize([256, 256])
     img_array = tf.keras.preprocessing.image.img_to_array(img)
-    # Convert to RGB (assuming image has alpha channel)
-    img_array = img_array[:,:,:3]  
-    img_array = np.expand_dims(img, axis=0) 
+
+    # Handle different image formats and alpha channels
+    if img_array.shape[-1] == 4:  # Alpha channel present
+        if preserve_alpha_channel:  # If model requires alpha channel
+            img_array = img_array.astype(np.float32) / 255.0  # Normalize
+        else:
+            img_array = img_array[:, :, :3]  # Extract RGB channels
+
+    # Normalize pixel values if not already done
+    img_array = img_array.astype(np.float32) / 255.0
+
+    img_array = np.expand_dims(img_array, axis=0)
 
     prediction = model.predict(img_array)
 
