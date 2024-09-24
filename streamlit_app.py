@@ -18,6 +18,7 @@ model = tf.keras.models.load_model('my_model.h5',  compile=False)
 #     return predicted_class
 
 def predict(model, img):
+    preserve_alpha_channel = False
     img = Image.open(img).resize([256, 256])
     img_array = tf.keras.preprocessing.image.img_to_array(img)
 
